@@ -1,16 +1,13 @@
-document.addEventListener('DOMContentLoaded', () => {
-  nextButton.classList.add('hide');
-});
-
 const beginButton = document.getElementById('begin');
 const nextButton = document.getElementById('next');
-const nextSetButton = document.getElementById('next-set')
+const restartButton = document.getElementById('restart')
 const mushroomContainerElement = document.getElementById('mushroom-container');
 const mushroomElement = document.getElementById('mushroom');
 const answerButtonsElement = document.getElementById('answer-buttons');
 const resultsElement = document.getElementById('results');
 const mushroomButton = document.getElementById('mushroom-btn');
 const lichenButton = document.getElementById('lichen-btn');
+nextButton.classList.add('hide');
 
 const mhs = new Image(200,200);
 mhs.src = 'img/manyheadedslime.jpg';
@@ -62,7 +59,6 @@ const reindeer = new Image(200,200);
 reindeer.src = 'img/reindeer.png';
 const cylpow = new Image(200,200);
 cylpow.src = 'img/cylpow.png';
-
 
 const enada = new Image(200,200);
 enada.src = 'img/enada.png';
@@ -347,7 +343,6 @@ const lichen = [
 ]
 	
 const mushrooms = [	
-
 	{
 		mushroom: images1[0],
 		answers: [
@@ -583,8 +578,8 @@ let score = 0;
 mushroomButton.classList.add('hide');
 lichenButton.classList.add('hide');
 beginButton.addEventListener('click', choice);
-nextSetButton.addEventListener('click', choice);
-nextSetButton.classList.add('hide');
+restartButton.addEventListener('click', choice);
+restartButton.classList.add('hide');
 
 function choice() {
   beginButton.classList.add('hide');
@@ -639,6 +634,7 @@ function clearStatusClass(element) {
   element.classList.remove('correct');
   element.classList.remove('incorrect');
 }
+
 nextButton.addEventListener('click', () => {
   currentMushroomIndex++;
   setNextMushroom();
@@ -651,7 +647,7 @@ function setNextMushroom() {
 
 function resetState() {
   clearStatusClass(document.body);
-  //nextButton.classList.add('hide');
+  nextButton.classList.add('hide');
   while (answerButtonsElement.firstChild) {
       answerButtonsElement.removeChild(answerButtonsElement.firstChild);
   }
@@ -672,12 +668,8 @@ function selectAnswer(selectedButton) {
   setTimeout(() => {
       if (shuffledMushrooms.length > currentMushroomIndex + 1) {
           nextButton.classList.remove('hide');
-      } else {
-          pauseMycoMem();
       }
-      if (shuffledLichen.length > currentLichenIndex + 1) {
-          nextButton.classList.remove('hide');
-      } else {
+      else {
           pauseMycoMem();
       }
   }, 50);
@@ -704,7 +696,7 @@ function pauseMycoMem() {
   resultsElement.classList.remove('hide');
   resultsElement.innerHTML = `
       <h2><font color="ffffff"><center>Accuracy: ${score} out of ${shuffledMushrooms.length}</p></center></h2>
-      <center><button onclick="restartMycoMem()">Restart</button> or you can go to the <button onclick="setTwo()">Next Set</button></center> or you can <button onclick="window.close()">Exit</button></center>`;
+      <center><button onclick="restartMycoMem()">Choose Set</button><form><button type="submit" formaction="https://www.github.com/sixie6e">Exit</button></form></center>`;
 }
 
 function restartMycoMem() {
